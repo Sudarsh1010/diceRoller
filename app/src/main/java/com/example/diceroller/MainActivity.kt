@@ -1,5 +1,6 @@
 package com.example.diceroller
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -15,13 +16,23 @@ class MainActivity : AppCompatActivity() {
     rollButton.setOnClickListener { rollDice() }
   }
   
+  @SuppressLint("SetTextI18n")
   private fun rollDice() {
     val dice = Dice(6) // declaring dice val with 6.numSides
     val diceRoll = dice.roll() // declaring diceRoll with value of dice to call roll() function
     
 //    to display result on screen
     val resultTextView: TextView = findViewById(R.id.textView)
-    resultTextView.text = diceRoll.toString()
+    val resultString = "Your Dice Rolled: "
+    
+    when (diceRoll) { // adding conditional to display different message
+      1 -> resultTextView.text = resultString + diceRoll.toString()
+      2 -> resultTextView.text = resultString + diceRoll.toString()
+      3 -> resultTextView.text = resultString + diceRoll.toString()
+      4 -> resultTextView.text = resultString + diceRoll.toString()
+      5 -> resultTextView.text = resultString + diceRoll.toString()
+      6 -> resultTextView.text = resultString + diceRoll.toString()
+    }
   }
   
 //  function behind dice logic
