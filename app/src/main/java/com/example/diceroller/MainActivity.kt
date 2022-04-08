@@ -3,7 +3,7 @@ package com.example.diceroller
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -14,25 +14,47 @@ class MainActivity : AppCompatActivity() {
 //    setting up to roll dice on click event
     val rollButton: Button = findViewById(R.id.button)
     rollButton.setOnClickListener { rollDice() }
+    
+//    Do a dice roll when the app starts
+    rollDice()
   }
   
   @SuppressLint("SetTextI18n")
   private fun rollDice() {
     val dice = Dice(6) // declaring dice val with 6.numSides
-    val diceRoll = dice.roll() // declaring diceRoll with value of dice to call roll() function
     
+    // declaring diceRoll with value of dice to call roll() function
+    val diceRoll1 = dice.roll()
+    val diceRoll2 = dice.roll()
+
 //    to display result on screen
-    val resultTextView: TextView = findViewById(R.id.textView)
-    val resultString = "Your Dice Rolled: "
+    val diceImage1: ImageView = findViewById(R.id.imageView4)
+    val diceImage2: ImageView = findViewById(R.id.imageView5)
     
-    when (diceRoll) { // adding conditional to display different message
-      1 -> resultTextView.text = resultString + diceRoll.toString()
-      2 -> resultTextView.text = resultString + diceRoll.toString()
-      3 -> resultTextView.text = resultString + diceRoll.toString()
-      4 -> resultTextView.text = resultString + diceRoll.toString()
-      5 -> resultTextView.text = resultString + diceRoll.toString()
-      6 -> resultTextView.text = resultString + diceRoll.toString()
+    val drawable1 = when (diceRoll1) { // adding conditional to display different message
+      1 -> R.drawable.dice_1
+      2 -> R.drawable.dice_2
+      3 -> R.drawable.dice_3
+      4 -> R.drawable.dice_4
+      5 -> R.drawable.dice_5
+      else -> R.drawable.dice_6
     }
+    val drawable2 = when (diceRoll2) { // adding conditional to display different message
+      1 -> R.drawable.dice_1
+      2 -> R.drawable.dice_2
+      3 -> R.drawable.dice_3
+      4 -> R.drawable.dice_4
+      5 -> R.drawable.dice_5
+      else -> R.drawable.dice_6
+    }
+    
+//    Setting up result Images to display on screen
+    diceImage1.setImageResource(drawable1)
+    diceImage2.setImageResource(drawable2)
+    
+//    Content description
+    diceImage1.contentDescription = diceRoll1.toString()
+    diceImage2.contentDescription = diceRoll2.toString()
   }
   
 //  function behind dice logic
